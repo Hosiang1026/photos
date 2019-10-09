@@ -10,8 +10,6 @@ before_install:
 
 after_script:
   # GH_REF是最下面配置的仓库地址
-  - git clone https://github.com/Hosiang1026/photos.git
-  - git checkout master
   - cd ../
   - git config user.name "Hosiang1026"
   - git config user.email "hosiang1026@sina.com"

@@ -20,8 +20,7 @@ script:
 
 after_script:
   # GH_REF是最下面配置的仓库地址
-  - git clone https://${GH_REF} .deploy_git
-  - cd .deploy_git
+  - git clone https://${GH_REF}
   - git checkout master
   - cd ../
   - git config user.name "Hosiang1026"
@@ -31,11 +30,8 @@ after_script:
   - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
 
   # Coding Pages
-  - git push --force --quiet "https://Hosiang1026:${CO_TOKEN}@${CO_REF}" master:master
+  - git push --force --quiet "https://git.dev.tencent.com/Hosiang1026:${CO_TOKEN}@${CO_REF}" master:master
   - git tag v0.0.$TRAVIS_BUILD_NUMBER -a -m "Auto Taged By TravisCI With Build $TRAVIS_BUILD_NUMBER"
-
-  # Coding Pages
-  - git push --quiet "https://Hosiang1026:${CO_TOKEN}@${CO_REF}" master:master --tags
 
 
 addons:

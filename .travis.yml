@@ -26,14 +26,6 @@ branches:
   only:
     - master
 
-env:
-  global:
-    # Coding Pages
-    - CO_REF: git.dev.tencent.com:Hosiang1026/photos.git
-
-
-
-
 # 配置Webhook通知
 notifications:
   webhooks: https://oapi.dingtalk.com/robot/send?access_token=efd3fcd86a9e3e8b69c1db1e67284191826be28b775a6e60e7453755a9ae9289

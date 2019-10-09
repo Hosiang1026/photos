@@ -1,5 +1,5 @@
 #设置语言
-language: false
+language: html
 
 # 更改时区
 before_install:

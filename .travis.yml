@@ -1,11 +1,11 @@
 #设置语言
-language: true
+language: false
 
 # 更改时区
 before_install:
   - export TZ='Asia/Shanghai'
 
-install: true
+install: false
 
 after_script:
   # GH_REF是最下面配置的仓库地址

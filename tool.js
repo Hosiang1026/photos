@@ -48,7 +48,7 @@ fs.readdir(path, function (err, files) {
 
     albumObjwww.sort = "0";
     albumObjwww.name = "壁纸相册";
-    albumObjwww.password = "22";
+    albumObjwww.password = "";
     albumObjwww.description = "相册描述";
     albumObjwww.photos = photosArr;
 

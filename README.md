@@ -1,2 +1,1 @@
-# photos
-This is a Photos.
+#photos

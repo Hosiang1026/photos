@@ -16,7 +16,8 @@ fs.readdir(path, function (err, files) {
     (function iterator(index) {
         if (index == files.length) {
             //fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"));
-            fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"), function (err) {
+            console.log(JSON.stringify(arr, null, "\t"));
+            fs.writeFile("/photos.json", JSON.stringify(arr, null, "\t"), function (err) {
                 if (err) throw err;
                 console.log('It\'s saved!');
             });
@@ -53,7 +54,5 @@ fs.readdir(path, function (err, files) {
     albumObjwww.photos = photosArr;
 
     arr.push(albumObjwww);
-    
-    console.log(JSON.stringify(arr, null, "\t"));
 
 });

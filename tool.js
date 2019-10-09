@@ -51,7 +51,9 @@ fs.readdir(path, function (err, files) {
     albumObjwww.password = "";
     albumObjwww.description = "测试相册描述";
     albumObjwww.photos = photosArr;
-    console.log(albumObjwww.password);
+
     arr.push(albumObjwww);
+    
+    console.log(JSON.stringify(arr, null, "\t"));
 
 });

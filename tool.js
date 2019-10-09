@@ -51,7 +51,7 @@ fs.readdir(path, function (err, files) {
     albumObjwww.password = "+ahiJogQTpDxQ8yIGrMGlw==";
     albumObjwww.description = "测试相册描述";
     albumObjwww.photos = photosArr;
-
+    console.log(albumObjwww.password);
     arr.push(albumObjwww);
 
 });

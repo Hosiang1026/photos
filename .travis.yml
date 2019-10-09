@@ -10,7 +10,7 @@ before_install:
 
 after_script:
   # GH_REF是最下面配置的仓库地址
-  - cd ../
+  - cd ./
   - git config user.name "Hosiang1026"
   - git config user.email "hosiang1026@sina.com"
   - git init

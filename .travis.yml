@@ -23,7 +23,7 @@ after_script:
   - git config user.email "hosiang1026@sina.com"
   - git init
   - git add .
-  - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
+  - git commit -m "Update Photos By TravisCI With Build $TRAVIS_BUILD_NUMBER"
 
   # Coding Pages
   - git push --force --quiet "https://Hosiang1026:${CO_TOKEN}@${CO_REF}" master:master

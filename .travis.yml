@@ -8,15 +8,10 @@ node_js: stable
 before_install:
   - export TZ='Asia/Shanghai'
 
-
-cache: yarn
-
 install:
-  - yarn
 
 
 script:
-  - yarn build
 
 after_script:
   # GH_REF是最下面配置的仓库地址

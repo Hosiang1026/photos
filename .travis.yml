@@ -5,7 +5,6 @@ language: node_js
 before_install:
   - export TZ='Asia/Shanghai'
 
-
 after_script:
   - git config user.name "Hosiang1026"
   - git config user.email "hosiang1026@sina.com"

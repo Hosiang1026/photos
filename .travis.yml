@@ -17,7 +17,7 @@ install:
 
 # command to run tests
 script:
-  - make test
+  - make squeezenet
 
 after_script:
   # GH_REF是最下面配置的仓库地址

@@ -1,0 +1,19 @@
+{
+  "name": "photos",
+  "author": "Howe Hsiang",
+  "description": "This is a Photos",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "url": ""
+  },
+  "scripts": {
+    "test": "node tool.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "morgan": "~1.9.1",
+    "silly-datetime": "0.1.2"
+  }
+}

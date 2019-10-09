@@ -15,8 +15,11 @@ fs.readdir(path, function (err, files) {
     //"抱歉，你没有权限访问";
     (function iterator(index) {
         if (index == files.length) {
-            // console.log(JSON.stringify(arr, null, "\t"));
-            fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"));
+            //fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"));
+            fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"), function (err) {
+                if (err) throw err;
+                console.log('It\'s saved!');
+            });
             console.log('write photos.json success!');
             return;
         }

@@ -17,7 +17,7 @@ fs.readdir(path, function (err, files) {
         if (index == files.length) {
             //fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"));
             console.log(JSON.stringify(arr, null, "\t"));
-            fs.writeFile("/photos.json", JSON.stringify(arr, null, "\t"), function (err) {
+            fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"), function (err) {
                 if (err) throw err;
                 console.log('It\'s saved!');
             });

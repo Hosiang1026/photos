@@ -9,7 +9,7 @@ before_install:
   - export TZ='Asia/Shanghai'
 
 install:
-  - sudo make install
+
 
 after_script:
   # GH_REF是最下面配置的仓库地址

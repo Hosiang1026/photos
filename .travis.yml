@@ -1,11 +1,8 @@
 #设置语言
-language: python
-
-sudo: enabled
+language: node_js
 
 #设置相应的版本
-python:
-  - "2.7"
+node_js: stable
 
 # 更改时区
 before_install:
@@ -13,11 +10,11 @@ before_install:
 
 # command to install dependencies
 install:
-  - pip install flake8 flake8-respect-noqa pre-commit
+  - npm install
 
 # command to run tests
 script:
-  - python make.py
+  - nodejs tool.js
 
 after_script:
   # GH_REF是最下面配置的仓库地址

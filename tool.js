@@ -2,7 +2,7 @@
 var fs = require("fs");
 var date = require("silly-datetime");
 var arr = [];
-
+var sorts = 1;
 var components = [];
 
 const files = fs.readdirSync('./resources');
@@ -33,7 +33,6 @@ for(var j = 0,len=components.length; j < len; j++) {
  */
 function readFolder(value){
 
-    var sorts = 1;
     var albumName = "";
     var photosArr = [];
 

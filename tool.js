@@ -1,7 +1,7 @@
 "use strict";
 var fs = require("fs");
 var date = require("silly-datetime");
-var path = "./image/";
+var path = "./resources/image/";
 
 fs.readdir(path, function (err, files) {
     if (err) {
@@ -17,11 +17,11 @@ fs.readdir(path, function (err, files) {
         if (index == files.length) {
             //fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"));
             console.log(JSON.stringify(arr, null, "\t"));
-            fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"), function (err) {
-                if (err) throw err;
-                console.log('It\'s saved!');
+            fs.writeFile("./resources/photos.json", JSON.stringify(arr, null, "\t"), function (err) {
+            if (err) throw err;
+             console.log('write photos.json success!');
             });
-            console.log('write photos.json success!');
+
             return;
         }
         fs.stat(path + files[index], function (err, stats) {

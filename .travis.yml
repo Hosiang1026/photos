@@ -24,6 +24,9 @@ script:
 
 after_script:
   # GH_REF是最下面配置的仓库地址
+  - git clone https://${GH_REF} resources
+  - cd  resources
+  - git checkout master
   - cd ./
   - git config user.name "Hosiang1026"
   - git config user.email "hosiang1026@sina.com"
@@ -31,6 +34,8 @@ after_script:
   - git add .
   - git commit -m "Update Photos By TravisCI With Build $TRAVIS_BUILD_NUMBER"
 
+  # Github Pages
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
   # Coding Pages
   - git push --force --quiet "https://Hosiang1026:${CO_TOKEN}@${CO_REF}" master:master
   - git tag v0.0.$TRAVIS_BUILD_NUMBER -a -m "Auto Taged By TravisCI With Build $TRAVIS_BUILD_NUMBER"
@@ -38,7 +43,7 @@ after_script:
 
 branches:
   only:
-    - master
+    - source
 
 # 配置Webhook通知
 notifications:

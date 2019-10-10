@@ -40,11 +40,11 @@ function readFolder(value){
     var path = "./resources/"+value+"/";
 
     if ("image" == value){
-        albumName = "文字配图";
+        albumName = "日常生活";
     }
 
     if ("picture" == value){
-        albumName = "日常生活";
+        albumName = "文字配图";
     }
 
     if ("system" == value){

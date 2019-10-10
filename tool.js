@@ -2,7 +2,7 @@
 var fs = require("fs");
 var date = require("silly-datetime");
 var arr = [];
-var albumObjwww = {};
+
 var components = [];
 
 const files = fs.readdirSync('./resources');
@@ -20,17 +20,9 @@ console.log(components);
  */
 for(var j = 0,len=components.length; j < len; j++) {
     var value = components[j];
-    var urlPath = "/photos/" +value+ "/";
-    var path = "./resources/"+value+"/";
-    console.log(path);
-
-    albumObjwww.sort = j;
-    albumObjwww.name = value+"相册";
-    albumObjwww.password = "";
-    albumObjwww.description = "测试相册描述";
 
     //读取资源文件
-    readFolder(path,urlPath,albumObjwww);
+    readFolder(value);
 }
 
 
@@ -39,11 +31,14 @@ for(var j = 0,len=components.length; j < len; j++) {
  * @param path
  * @param urlPath
  */
-function readFolder(path,urlPath,albumObjwww){
+function readFolder(value){
 
     var photosArr = [];
 
-    fs.readdir(path,albumObjwww, function (err, files) {
+    var urlPath = "/photos/" +value+ "/";
+    var path = "./resources/"+value+"/";
+
+    fs.readdir(path, function (err, files) {
         if (err) {
             return;
         }
@@ -72,6 +67,11 @@ function readFolder(path,urlPath,albumObjwww){
             });
 
             if (index == files.length) {
+                var albumObjwww = {};
+                albumObjwww.sort = index;
+                albumObjwww.name = value+"相册";
+                albumObjwww.password = "";
+                albumObjwww.description = "测试相册描述";
                 albumObjwww.photos = photosArr;
                 arr.push(albumObjwww);
                 if (arr.length == components.length){

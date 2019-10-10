@@ -49,6 +49,8 @@ function readFolder(value){
 
     if ("system" == value){
         albumName = "网站图片";
+    }else{
+        albumName = value+"相册";
     }
     fs.readdir(path, function (err, files) {
         if (err) {

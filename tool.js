@@ -33,11 +33,23 @@ for(var j = 0,len=components.length; j < len; j++) {
  */
 function readFolder(value){
 
+    var albumName = "";
     var photosArr = [];
 
     var urlPath = "/photos/" +value+ "/";
     var path = "./resources/"+value+"/";
 
+    if ("image" == value){
+        albumName = "文字配图";
+    }
+
+    if ("picture" == value){
+        albumName = "日常生活";
+    }
+
+    if ("system" == value){
+        albumName = "网站图片";
+    }
     fs.readdir(path, function (err, files) {
         if (err) {
             return;
@@ -55,7 +67,7 @@ function readFolder(value){
                     //npm install silly-datetime
                     var today = date.format(new Date(),'YYYY-MM-DD');
                     photo.sort = index;
-                    photo.name = today + " 高清壁纸(" + index + ")";
+                    photo.name = today + " " + albumName + "(" + index + ")";
                     photo.thumbnail = urlPath + thumbnail;
                     photo.description ="照片描述";
 
@@ -69,7 +81,7 @@ function readFolder(value){
             if (index == files.length) {
                 var albumObjwww = {};
                 albumObjwww.sort = index;
-                albumObjwww.name = value+"相册";
+                albumObjwww.name = albumName;
                 albumObjwww.password = "";
                 albumObjwww.description = "测试相册描述";
                 albumObjwww.photos = photosArr;

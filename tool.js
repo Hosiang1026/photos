@@ -2,7 +2,7 @@
 var fs = require("fs");
 var date = require("silly-datetime");
 var arr = [];
-var sorts = 1;
+var sorts = 0;
 var components = [];
 
 const files = fs.readdirSync('./resources');

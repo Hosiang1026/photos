@@ -5,6 +5,13 @@ var arr = [];
 var sorts = 0;
 var components = [];
 
+var albumNameMap = {
+    'image': '日常生活',
+    'picture': '文字配图',
+    'system': '网站图片',
+    'diary': '加密相册'
+};
+
 const files = fs.readdirSync('./resources');
 files.forEach(function (item) {
     var stat = fs.lstatSync("./resources/" + item);
@@ -33,26 +40,21 @@ for(var j = 0,len=components.length; j < len; j++) {
  */
 function readFolder(value){
 
-    var albumName = "";
     var photosArr = [];
-
+    var albumPassword = "";
     var urlPath = "/photos/" +value+ "/";
     var path = "./resources/"+value+"/";
 
-    if ("image" == value){
-        albumName = "日常生活";
+    var albumName = albumNameMap[value];
+
+    if (undefined == albumName){
+        albumName = value;
     }
 
-    if ("picture" == value){
-        albumName = "文字配图";
-    }
-
-    if ("system" == value){
-        albumName = "网站图片";
-    }
-
-    if ("" == albumName){
-        albumName = value+"相册";
+    if (-1 !=albumName.indexOf("密")) {
+        albumPassword = "+ahiJogQTpDxQ8yIGrMGlw==";
+    }else{
+        albumPassword = "";
     }
 
     fs.readdir(path, function (err, files) {
@@ -88,7 +90,7 @@ function readFolder(value){
                 var albumObjwww = {};
                 albumObjwww.sort = sorts;
                 albumObjwww.name = albumName;
-                albumObjwww.password = "";
+                albumObjwww.password = albumPassword;
                 albumObjwww.description = "测试相册描述";
                 albumObjwww.photos = photosArr;
                 arr.push(albumObjwww);

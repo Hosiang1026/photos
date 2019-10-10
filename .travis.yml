@@ -24,10 +24,10 @@ script:
 
 after_script:
   # GH_REF是最下面配置的仓库地址
-  - git clone https://${GH_REF} resources
-  - cd  resources
-  - git checkout master
-  - cd ./
+  - git clone https://${GH_REF}
+  - cd  ./resources
+  - git checkout source
+  - cd ./resources
   - git config user.name "Hosiang1026"
   - git config user.email "hosiang1026@sina.com"
   - git init

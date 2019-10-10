@@ -33,6 +33,7 @@ for(var j = 0,len=components.length; j < len; j++) {
  */
 function readFolder(value){
 
+    var sorts = 1;
     var albumName = "";
     var photosArr = [];
 
@@ -78,14 +79,16 @@ function readFolder(value){
 
             });
 
+
             if (index == files.length) {
                 var albumObjwww = {};
-                albumObjwww.sort = index;
+                albumObjwww.sort = sorts;
                 albumObjwww.name = albumName;
                 albumObjwww.password = "";
                 albumObjwww.description = "测试相册描述";
                 albumObjwww.photos = photosArr;
                 arr.push(albumObjwww);
+                sorts++;
                 if (arr.length == components.length){
                     //写入Json文件
                     writeJsonFile(arr);

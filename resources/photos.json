@@ -1,6 +1,6 @@
 [
 	{
-		"sort": 19,
+		"sort": 1,
 		"name": "网站图片",
 		"password": "",
 		"description": "测试相册描述",
@@ -122,7 +122,7 @@
 		]
 	},
 	{
-		"sort": 39,
+		"sort": 1,
 		"name": "日常生活",
 		"password": "",
 		"description": "测试相册描述",
@@ -364,7 +364,7 @@
 		]
 	},
 	{
-		"sort": 91,
+		"sort": 1,
 		"name": "文字配图",
 		"password": "",
 		"description": "测试相册描述",

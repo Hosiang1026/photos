@@ -42,7 +42,6 @@ function readFolder(value){
 
     var photosArr = [];
     var albumPassword = "";
-    var urlPathVal = "/" +value+ "/";
     var urlPath = "/photos/" +value+ "/";
     var path = "./resources/"+value+"/";
 
@@ -76,7 +75,7 @@ function readFolder(value){
                     var today = date.format(new Date(),'YYYY-MM-DD');
                     photo.sort = index;
                     photo.name = today + " " + albumName + "(" + index + ")";
-                    photo.thumbnail = urlPathVal + thumbnail;
+                    photo.thumbnail = urlPath + thumbnail;
                     photo.description ="照片描述";
 
                     photosArr.push(photo);

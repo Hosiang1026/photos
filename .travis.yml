@@ -20,6 +20,7 @@ install:
 
 # command to run tests
 script:
+  - npm install request
   - node tool.js
 
 after_script:

@@ -1,6 +1,9 @@
 "use strict";
 var fs = require("fs");
 var date = require("silly-datetime");
+var request = require('request');
+var covUrl = "https://service-qzyqjgtg-1254466492.gz.apigw.tencentcs.com/release/DxyData";
+
 var arr = [];
 var sorts = 0;
 var components = [];
@@ -117,6 +120,18 @@ function writeJsonFile(arr) {
         console.log('write photos.json success!');
     });
 
+    
+    //写入疫情数据
+    request(covUrl, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(JSON.stringify(body, null, "\t"));
+        fs.writeFile("./resources/covData.json", body, function(err) {
+            if (err) {
+                throw err;
+            }
+        });
+    }
+    });
 
 }
 

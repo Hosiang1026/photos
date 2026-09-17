@@ -307,7 +307,7 @@
   }
 
   function goAlbum(name) {
-    location.href = "album.html?name=" + encodeURIComponent(name);
+    location.href = "album?name=" + encodeURIComponent(name);
   }
 
   function askPwd(album, onOk) {
@@ -397,7 +397,7 @@
   async function hydrateAlbumCovers(rows) {
     for (const a of rows) {
       if (!isLockedAlbum(a) || !isUnlocked(a.name)) continue;
-      const el = grid.querySelector(`.card[data-name="${CSS.escape(a.name)}"] [data-enc-cover]");
+      const el = grid.querySelector(`.card[data-name="${CSS.escape(a.name)}"] [data-enc-cover]`);
       if (!el || !a.photos || !a.photos[0]) continue;
       try {
         const url = await decryptToObjectUrl(a, a.photos[0].thumbnail);
@@ -498,7 +498,7 @@
     }
     if (navAlbum) {
       navAlbum.textContent = albumName || "相册";
-      navAlbum.href = "album.html?name=" + encodeURIComponent(albumName);
+      navAlbum.href = "album?name=" + encodeURIComponent(albumName);
     }
     document.title = (albumName || "相册") + " | 狂欢马克思";
   }

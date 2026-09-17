@@ -130,6 +130,7 @@ node tool.js
 
 | 项 | 值 |
 | -- | -- |
+| 访问 | https://haoxiang.eu.org/photos/ |
 | 触发 | `push` → `source`，或 `workflow_dispatch` |
 | 生成 | `node tool.js` |
 | 发布目录 | `./resources` |

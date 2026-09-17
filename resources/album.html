@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>图床 | 狂欢马克思</title>
+  <title>相册 | 狂欢马克思</title>
   <link rel="stylesheet" href="app.css">
   <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body data-page="albums">
+<body data-page="album" data-scope="bed">
   <header class="nav">
-    <a href="./" class="on">图床</a>
+    <a href="./">图床</a>
+    <a href="#" class="on" id="nav-album"></a>
     <span class="nav-r">
       <button type="button" class="theme" id="theme" aria-label="切换主题"><svg class="on-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg><svg class="on-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 14.5A9 9 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg></button>
     </span>
@@ -18,15 +19,28 @@
     <section class="gallery">
       <section class="bar">
         <form id="q" class="q">
-          <input name="name" placeholder="相册" autocomplete="off">
+          <input name="name" placeholder="名称" autocomplete="off">
           <button type="submit" class="pri">搜索</button>
+          <a class="btn" href="./">返回</a>
         </form>
       </section>
       <p id="meta" class="hint" hidden></p>
-      <div id="grid" class="grid lib"></div>
+      <div id="grid" class="grid pics"></div>
       <div id="pager" class="pager"></div>
     </section>
   </main>
+  <div id="lb" class="lb" hidden>
+    <button type="button" class="x" id="lbx">关闭</button>
+    <div id="lbbody"></div>
+    <div id="lbbar" class="lbbar">
+      <p id="lbinfo"></p>
+      <div class="ops">
+        <button type="button" id="lburl" class="ok">直链</button>
+        <button type="button" id="lbmd" class="ok">Markdown</button>
+        <button type="button" id="lbhtml" class="ok">HTML</button>
+      </div>
+    </div>
+  </div>
   <dialog id="pwd">
     <form method="dialog" id="pwdf">
       <h2>加密相册</h2>

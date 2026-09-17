@@ -1,8 +1,7 @@
 "use strict";
 var fs = require("fs");
+var path = require("path");
 var date = require("silly-datetime");
-var request = require('request');
-var covUrl = "https://service-qzyqjgtg-1254466492.gz.apigw.tencentcs.com/release/DxyData";
 
 var arr = [];
 var sorts = 0;
@@ -15,6 +14,10 @@ var albumNameMap = {
     'diary': '加密相册'
 };
 
+var IMG_EXT = {
+    '.jpg': 1, '.jpeg': 1, '.png': 1, '.gif': 1, '.webp': 1, '.bmp': 1
+};
+
 const files = fs.readdirSync('./resources');
 files.forEach(function (item) {
     var stat = fs.lstatSync("./resources/" + item);
@@ -25,113 +28,98 @@ files.forEach(function (item) {
 
 console.log(components);
 
-/**
- * 遍历文件夹
- */
-for(var j = 0,len=components.length; j < len; j++) {
-    var value = components[j];
-
-    //读取资源文件
-    readFolder(value);
+for (var j = 0, len = components.length; j < len; j++) {
+    readFolder(components[j]);
 }
 
+function isEncryptedAlbum(albumName, dirPath) {
+    if (albumName && albumName.indexOf("密") !== -1) return true;
+    return fs.existsSync(path.join(dirPath, ".crypto.json"));
+}
 
-/**
- * 读取资源文件
- * @param path
- * @param urlPath
- */
-function readFolder(value){
+function readCrypto(dirPath) {
+    var p = path.join(dirPath, ".crypto.json");
+    if (!fs.existsSync(p)) return null;
+    try {
+        return JSON.parse(fs.readFileSync(p, "utf8"));
+    } catch (e) {
+        return null;
+    }
+}
 
+function readFolder(value) {
     var photosArr = [];
-    var albumPassword = "";
-    var urlPath = "/photos/" +value+ "/";
-    var path = "./resources/"+value+"/";
-
+    var urlPath = "/photos/" + value + "/";
+    var dirPath = "./resources/" + value + "/";
     var albumName = albumNameMap[value];
-
-    if (undefined == albumName){
+    if (undefined == albumName) {
         albumName = value;
     }
 
-    if (-1 !=albumName.indexOf("密")) {
-        albumPassword = "+ahiJogQTpDxQ8yIGrMGlw==";
-    }else{
-        albumPassword = "";
-    }
+    var encrypted = isEncryptedAlbum(albumName, dirPath);
+    var cryptoMeta = encrypted ? readCrypto(dirPath) : null;
 
-    fs.readdir(path, function (err, files) {
+    fs.readdir(dirPath, function (err, files) {
         if (err) {
             return;
         }
 
+        files = files.filter(function (name) {
+            if (name === ".crypto.json") return false;
+            if (name.indexOf(".") === 0) return false;
+            var ext = path.extname(name).toLowerCase();
+            if (encrypted) {
+                return name.slice(-4) === ".enc";
+            }
+            if (name.slice(-4) === ".enc") return false;
+            return !!IMG_EXT[ext];
+        }).sort();
+
         (function iterator(index) {
-            fs.stat(path + files[index], function (err, stats) {
-                if (err) {
-                    return;
+            if (index === files.length) {
+                var albumObj = {};
+                albumObj.sort = sorts;
+                albumObj.name = albumName;
+                albumObj.description = "测试相册描述";
+                albumObj.photos = photosArr;
+                if (encrypted) {
+                    albumObj.encrypted = true;
+                    albumObj.crypto = cryptoMeta;
+                    albumObj.password = "";
+                } else {
+                    albumObj.encrypted = false;
+                    albumObj.password = "";
                 }
-                if (stats.isFile()) {
-
-                    var photo = {};
-                    var thumbnail = files[index];
-                    //npm install silly-datetime
-                    var today = date.format(new Date(),'YYYY-MM-DD');
-                    photo.sort = index;
-                    photo.name = today + " " + albumName + "(" + index + ")";
-                    photo.thumbnail = urlPath + thumbnail;
-                    photo.description ="照片描述";
-
-                    photosArr.push(photo);
-
-                }
-                iterator(index + 1);
-
-            });
-
-
-            if (index == files.length) {
-                var albumObjwww = {};
-                albumObjwww.sort = sorts;
-                albumObjwww.name = albumName;
-                albumObjwww.password = albumPassword;
-                albumObjwww.description = "测试相册描述";
-                albumObjwww.photos = photosArr;
-                arr.push(albumObjwww);
+                arr.push(albumObj);
                 sorts++;
-                if (arr.length == components.length){
-                    //写入Json文件
+                if (arr.length == components.length) {
                     writeJsonFile(arr);
                 }
+                return;
             }
-        }(0));
 
+            fs.stat(dirPath + files[index], function (err, stats) {
+                if (!err && stats.isFile()) {
+                    var today = date.format(new Date(), "YYYY-MM-DD");
+                    var base = files[index].replace(/\.enc$/i, "");
+                    photosArr.push({
+                        sort: photosArr.length,
+                        name: today + " " + albumName + "(" + photosArr.length + ")",
+                        thumbnail: urlPath + files[index],
+                        description: "照片描述",
+                        file: base
+                    });
+                }
+                iterator(index + 1);
+            });
+        }(0));
     });
 }
 
-/**
- * 写入Json文件
- */
 function writeJsonFile(arr) {
-
-    //fs.writeFile("./photos.json", JSON.stringify(arr, null, "\t"));
     console.log(JSON.stringify(arr, null, "\t"));
     fs.writeFile("./resources/photos.json", JSON.stringify(arr, null, "\t"), function (err) {
         if (err) throw err;
-        console.log('write photos.json success!');
+        console.log("write photos.json success!");
     });
-
-    
-    //写入疫情数据
-    request(covUrl, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(JSON.stringify(body, null, "\t"));
-        fs.writeFile("./resources/covData.json", body, function(err) {
-            if (err) {
-                throw err;
-            }
-        });
-    }
-    });
-
 }
-

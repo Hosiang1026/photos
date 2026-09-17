@@ -8,7 +8,9 @@
     "url": ""
   },
   "scripts": {
-    "test": "node tool.js"
+    "test": "node tool.js",
+    "build": "node tool.js",
+    "encrypt": "node encrypt-album.js --dir resources/diary --remove"
   },
   "dependencies": {
     "cookie-parser": "~1.4.7",

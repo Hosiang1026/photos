@@ -1,3 +1,9 @@
 .idea/
 *.log
 node_modules/
+
+# 加密相册 resources/diary/：明文原图勿提交，只提交 .enc 与 .crypto.json
+resources/diary/**
+!resources/diary/**/
+!resources/diary/**/*.enc
+!resources/diary/**/.crypto.json

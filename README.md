@@ -2,8 +2,7 @@
 
 博客图床 / 静态相册。向 `resources/` 下相册目录放入图片，`tool.js` 扫描生成 `photos.json`，前端读取展示；推送到 `source` 分支后由 GitHub Actions 部署到 Pages（`master`）。
 
-作者：[吉祥草](https://www.hosiang.cn)（狂欢马克思）  
-仓库：`Hosiang1026/photos`
+作者：[吉祥草](https://www.hosiang.cn)（狂欢马克思）
 
 ## 调用链
 
@@ -26,8 +25,8 @@ CI（push source / workflow_dispatch）
 | `encrypt-album.js` | 加密相册：明文图 → `.enc` + `.crypto.json` |
 | `package.json` | `npm test` / `npm run build` = `node tool.js`；`npm run encrypt` 加密 diary |
 | `resources/` | GitHub Pages 发布根目录 |
-| `resources/index.html` | 相册列表 |
-| `resources/album.html` | 相册详情 |
+| `resources/index.html` | 相册列表（`./`） |
+| `resources/album.html` | 相册详情（跳转 `album?name=`） |
 | `resources/app.js` / `app.css` | 前端逻辑与样式 |
 | `resources/photos.json` | 相册索引（由 `tool.js` 生成） |
 | `resources/image/` | 日常生活 |
@@ -81,6 +80,7 @@ node tool.js
 - 列表页加密相册封面为锁；点开需输入加密时的密码
 - 密码正确：会话内解锁，封面与详情图解密显示
 - 密码错误：无法解密
+- 加密图灯箱仅本地解密预览，不提供直链 / Markdown / HTML 复制
 
 ### 追加图片
 
